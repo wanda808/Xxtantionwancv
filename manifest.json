@@ -1,0 +1,13 @@
+{
+  "background_color": "#e52561",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Wanda Tools",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Wanda",
+  "start_url": "/",
+  "theme_color": "#d71a1a",
+  "id": "wanda-tools",
+  "description": "Wanda Tools - kumpulan tools online."
+}
