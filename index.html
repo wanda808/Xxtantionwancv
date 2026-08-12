@@ -631,6 +631,39 @@ body {
     letter-spacing: 0.5px;
 }
 
+/* Green theme for Nokia Message, Tanya Ustadz, ML Tools */
+.tools-card.theme-green {
+    border-color: rgba(74, 222, 128, 0.18) !important;
+    background: rgba(10, 30, 18, 0.55) !important;
+}
+.tools-card.theme-green:hover {
+    border-color: rgba(74, 222, 128, 0.45) !important;
+    background: rgba(12, 40, 24, 0.88) !important;
+    box-shadow: 0 8px 40px rgba(34, 197, 94, 0.22) !important;
+}
+.tools-card.theme-green .icon {
+    color: #4ade80 !important;
+}
+.tools-card.theme-green:hover .icon {
+    color: #86efac !important;
+}
+.tools-card.theme-green h4 {
+    color: #bbf7d0 !important;
+}
+.tools-card.theme-green p {
+    color: #6b9f7a !important;
+}
+.tools-card.theme-green .arrow {
+    color: #3d7a52 !important;
+}
+.tools-card.theme-green:hover .arrow {
+    color: #4ade80 !important;
+}
+.tools-card.theme-green .badge {
+    background: rgba(74, 222, 128, 0.16) !important;
+    color: #4ade80 !important;
+}
+
 .section-title {
     font-family: 'Orbitron', monospace;
     font-size: 13px;
@@ -4960,9 +4993,11 @@ body.nx-about-dev-open{
 
 .nx-top-nav-copy{
   min-width:0;
+  flex:1 1 auto;
   display:flex;
   align-items:center;
   gap:9px;
+  overflow:hidden;
 }
 
 .nx-top-nav-mark{
@@ -4983,8 +5018,9 @@ body.nx-about-dev-open{
 
 .nx-top-nav-text{
   min-width:0;
-  display:grid;
-  gap:2px;
+  display:flex;
+  align-items:center;
+  gap:0;
 }
 
 .nx-top-nav-text b{
@@ -4992,12 +5028,51 @@ body.nx-about-dev-open{
   font-size:9px;
   font-weight:850;
   letter-spacing:.025em;
+  white-space:nowrap;
 }
 
-.nx-top-nav-text span{
-  color:#6f6577;
-  font-size:7px;
+.nx-typewriter{
+  display:inline-flex;
+  align-items:center;
+  min-width:0;
+  margin-left:10px;
+  padding:2px 0;
+  font-family:'Orbitron', monospace;
+  font-size:13px;
   font-weight:700;
+  letter-spacing:.06em;
+  line-height:1.1;
+  color:#58a6ff;
+  text-transform:uppercase;
+}
+
+.nx-typewriter-text{
+  color:#58a6ff;
+  font-weight:700;
+  text-shadow:0 0 14px rgba(88,166,255,.45), 0 0 28px rgba(88,166,255,.18);
+  white-space:nowrap;
+}
+
+.nx-typewriter-cursor{
+  display:inline-block;
+  margin-left:2px;
+  color:#79c0ff;
+  font-weight:400;
+  font-size:1.05em;
+  animation:nxTypeCursorBlink .72s step-end infinite;
+}
+
+@keyframes nxTypeCursorBlink{
+  0%,100%{opacity:1}
+  50%{opacity:0}
+}
+
+@media(max-width:520px){
+  .nx-typewriter{
+    font-size:11px;
+    margin-left:8px;
+    letter-spacing:.04em;
+  }
 }
 
 .nx-top-menu{
@@ -5391,7 +5466,9 @@ body.nx-about-dev-open{
 
       <span class="nx-top-nav-text">
         <b>Menu Informasi</b>
-        <span>About Dev · Report Bug</span>
+      </span>
+      <span class="nx-typewriter" id="nxTypewriter" aria-live="polite">
+        <span class="nx-typewriter-text"></span><span class="nx-typewriter-cursor">|</span>
       </span>
     </div>
 
@@ -7054,6 +7131,7 @@ const allTools = [
 function renderGrid(containerId, items, isExternal = false) {
     const container = document.getElementById(containerId);
     if (!container) return;
+    const greenIds = { nokiamsg: 1, tanyaustadz: 1, mltools: 1 };
     container.innerHTML = items.map(item => {
         const clickAttr = item.id === 'unbanwa' ?
             `onclick="window.openNexusUnban && window.openNexusUnban()"` :
@@ -7066,8 +7144,9 @@ function renderGrid(containerId, items, isExternal = false) {
                 (isExternal || item.link ?
                     `onclick="window.open('${item.link || '#'}','_blank')"` :
                     `onclick="showTool('${item.id}')"`))));
+        const themeClass = greenIds[item.id] ? ' theme-green' : '';
         return `
-            <div class="tools-card" ${clickAttr}>
+            <div class="tools-card${themeClass}" ${clickAttr}>
                 <div class="icon"><i class="${item.icon}"></i></div>
                 <h4>${item.name}</h4>
                 <p>${item.desc}</p>
@@ -11898,6 +11977,61 @@ window.openNexusTopMenu =
 })();
 </script>
 
+<script id="nxTypewriterScript">
+(function(){
+  "use strict";
+
+  var el = document.getElementById("nxTypewriter");
+  if(!el) return;
+
+  var textEl = el.querySelector(".nx-typewriter-text");
+  if(!textEl) return;
+
+  var words = [
+    "Wanda",
+    "Indonesia",
+    "Amerika",
+    "Thailand",
+    "Korean"
+  ];
+
+  var wordIndex = 0;
+  var charIndex = 0;
+  var isDeleting = false;
+  var typingSpeed = 95;
+  var deletingSpeed = 48;
+  var pauseEnd = 1600;
+  var pauseStart = 420;
+
+  function tick(){
+    var current = words[wordIndex];
+    if(isDeleting){
+      textEl.textContent = current.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      textEl.textContent = current.substring(0, charIndex + 1);
+      charIndex++;
+    }
+
+    var delay = isDeleting ? deletingSpeed : typingSpeed;
+
+    if(!isDeleting && charIndex === current.length){
+      delay = pauseEnd;
+      isDeleting = true;
+    } else if(isDeleting && charIndex === 0){
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      delay = pauseStart;
+    }
+
+    setTimeout(tick, delay);
+  }
+
+  // start after splash roughly settles
+  setTimeout(tick, 4200);
+})();
+</script>
+
 
 <script id="nxReportFeedbackRoomScript">
 (function(){
@@ -13665,7 +13799,7 @@ body.nx-universal-room-open{overflow:hidden!important}
     fakeovo:{renderer:'renderFakeOvo', category:'tools', icon:'fa-solid fa-wallet', title:'Fake OVO', desc:'Atur nominal dan hasilkan tampilan saldo OVO.', accent:'#a78bfa', accent2:'#6d28d9', rgb:'167,139,250', badge:'Nexus Canvas Studio'},
     quotegenerator:{renderer:'renderQuoteGenerator', category:'tools', icon:'fa-solid fa-quote-left', title:'Quote Generator', desc:'Susun teks dan penulis lalu render gambar quote monokrom.', accent:'#cbd5e1', accent2:'#7c3aed', rgb:'203,213,225', badge:'Nexus Quote Studio'},
     carifakta:{renderer:'renderCariFakta', category:'tools', icon:'fa-solid fa-magnifying-glass-chart', title:'CariFakta', desc:'Periksa klaim, konteks, dan tingkat keyakinan menggunakan AI.', accent:'#4ade80', accent2:'#7c3aed', rgb:'74,222,128', badge:'Nexus Fact Intelligence'},
-    mltools:{renderer:'renderMlTools', category:'tools', icon:'fa-solid fa-gamepad', title:'ML Tools Nexus', desc:'Script Skin MLBB, kalkulator Winrate, dan Stalk akun dengan mesin serta hasil asli ML Tools.', accent:'#67e8f9', accent2:'#7c3aed', rgb:'103,232,249', badge:'Nexus ML Gaming Lab'},
+    mltools:{renderer:'renderMlTools', category:'tools', icon:'fa-solid fa-gamepad', title:'ML Tools Nexus', desc:'Script Skin MLBB, kalkulator Winrate, dan Stalk akun dengan mesin serta hasil asli ML Tools.', accent:'#4ade80', accent2:'#15803d', rgb:'74,222,128', badge:'Nexus ML Gaming Lab'},
 virusscan:  {renderer:'renderVirusScan', category:'tools', icon:'fa-solid fa-shield-virus', title:'Virus Scan Nexus', desc:'Analisis lokal untuk URL, file, hash, domain, dan IP dalam ruang keamanan All Tools Nexus.', accent:'#c084fc', accent2:'#7c3aed', rgb:'192,132,252', badge:'Nexus Security Core'},
 instagram:  {renderer:'renderInstagram',   category:'downloader', icon:'fa-brands fa-instagram', title:'Instagram Downloader', desc:'Ambil video, Reels, foto, carousel, metadata, dan caption dalam ruang download khusus.', accent:'#e879f9', accent2:'#c026d3', rgb:'232,121,249', badge:'Media Studio'},
     youtube:    {renderer:'renderYoutube',     category:'downloader', icon:'fa-brands fa-youtube', title:'YouTube Downloader', desc:'Pilih video MP4 atau audio MP3 dengan tampilan hasil dan opsi kualitas yang lebih luas.', accent:'#fb7185', accent2:'#dc2626', rgb:'251,113,133', badge:'Video & Audio'},
