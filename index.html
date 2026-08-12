@@ -284,14 +284,90 @@ body {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    background:
+        radial-gradient(circle at center, rgba(34, 197, 94, 0.18) 0 3px, transparent 4px),
+        radial-gradient(circle at center, transparent 38%, rgba(124, 58, 237, 0.22) 39%, transparent 41%),
+        radial-gradient(circle at center, transparent 58%, rgba(168, 85, 247, 0.18) 59%, transparent 61%),
+        radial-gradient(circle at center, #12081f 0%, #1a0b2e 70%, #0d0618 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 20px;
     color: #fff;
     flex-shrink: 0;
-    box-shadow: 0 4px 30px rgba(124, 58, 237, 0.25);
+    position: relative;
+    overflow: hidden;
+    border: 1.5px solid rgba(168, 85, 247, 0.35);
+    box-shadow:
+        0 0 0 1px rgba(34, 197, 94, 0.08),
+        0 4px 18px rgba(124, 58, 237, 0.28),
+        inset 0 0 12px rgba(34, 197, 94, 0.08);
+}
+
+.user-avatar i {
+    display: none !important;
+}
+
+.user-avatar .radar-sweep {
+    position: absolute;
+    inset: 2px;
+    border-radius: 50%;
+    background: conic-gradient(
+        from 0deg,
+        rgba(34, 197, 94, 0.55) 0deg,
+        rgba(34, 197, 94, 0.18) 40deg,
+        transparent 90deg,
+        transparent 360deg
+    );
+    animation: radarSpin 2.4s linear infinite;
+    pointer-events: none;
+}
+
+.user-avatar .radar-sweep::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1.5px;
+    height: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, #4ade80, rgba(74, 222, 128, 0.15));
+    box-shadow: 0 0 6px rgba(74, 222, 128, 0.8);
+    border-radius: 2px;
+}
+
+.user-avatar .radar-center {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.9), 0 0 14px rgba(34, 197, 94, 0.45);
+    z-index: 2;
+}
+
+.user-avatar .radar-blip {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #c084fc;
+    box-shadow: 0 0 6px rgba(192, 132, 252, 0.9);
+    top: 28%;
+    left: 62%;
+    animation: radarBlip 2.4s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes radarSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+@keyframes radarBlip {
+    0%, 100% { opacity: 0.25; transform: scale(0.8); }
+    40% { opacity: 1; transform: scale(1.15); }
+    70% { opacity: 0.5; transform: scale(1); }
 }
 
 .user-info {
@@ -330,6 +406,62 @@ body {
 
 .user-info .item .value.online {
     color: #22c55e;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.user-info .item .value.offline {
+    color: #ef4444;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.online-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    flex-shrink: 0;
+    position: relative;
+    box-shadow: 0 0 6px rgba(34, 197, 94, 0.7);
+    animation: onlinePulse 1.6s ease-out infinite;
+}
+
+.online-dot::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 2px solid rgba(34, 197, 94, 0.55);
+    animation: onlineRing 1.6s ease-out infinite;
+}
+
+.offline-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ef4444;
+    flex-shrink: 0;
+    box-shadow: 0 0 6px rgba(239, 68, 68, 0.45);
+    animation: none;
+}
+
+@keyframes onlinePulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.15); opacity: 0.85; }
+}
+
+@keyframes onlineRing {
+    0% {
+        transform: scale(0.85);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
 }
 
 .battery-bar {
@@ -5604,7 +5736,11 @@ body.nx-about-dev-open{
 
 
         <div class="user-card" id="userCard">
-            <div class="user-avatar"><i class="fas fa-user"></i></div>
+            <div class="user-avatar" title="Nexus Radar">
+                <div class="radar-sweep"></div>
+                <div class="radar-blip"></div>
+                <div class="radar-center"></div>
+            </div>
             <div class="user-info">
                 <div class="item">
                     <i class="fas fa-globe"></i>
@@ -5624,7 +5760,7 @@ body.nx-about-dev-open{
                 <div class="item">
                     <i class="fas fa-signal"></i>
                     <span class="label">Status</span>
-                    <span class="value online" id="userStatus">● Online</span>
+                    <span class="value online" id="userStatus"><span class="online-dot" aria-hidden="true"></span>Online</span>
                 </div>
                 <div class="item">
                     <div class="battery-bar">
@@ -5987,7 +6123,20 @@ async function getUserInfo() {
     else if (ua.includes('UCBrowser')) browser = 'UC Browser';
     else if (ua.includes('SamsungBrowser')) browser = 'Samsung Internet';
     document.getElementById('userBrowser').textContent = browser;
-    document.getElementById('userStatus').textContent = '● Online';
+    function updateNetworkStatus() {
+    var el = document.getElementById('userStatus');
+    if (!el) return;
+    if (navigator.onLine) {
+        el.className = 'value online';
+        el.innerHTML = '<span class="online-dot" aria-hidden="true"></span>Online';
+    } else {
+        el.className = 'value offline';
+        el.innerHTML = '<span class="offline-dot" aria-hidden="true"></span>Offline';
+    }
+}
+updateNetworkStatus();
+window.addEventListener('online', updateNetworkStatus);
+window.addEventListener('offline', updateNetworkStatus);
 
     if (navigator.getBattery) {
         try {
