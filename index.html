@@ -2,7 +2,7 @@
 <html lang="id"><head><base href="/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Under Maintenance — All Tools Nexus</title>
+    <title>All Tools Nexus</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap">
     <style>/* style.css */
@@ -5557,199 +5557,8 @@ body.nx-about-dev-open{
 }
 </style>
 
-<style id="nxMaintenanceStyle">
-  #nx-maintenance-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 2147483647;
-    background: #030008;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    overflow: hidden;
-    font-family: 'Poppins', system-ui, sans-serif;
-    color: #e0d0ff;
-  }
-  #nx-maintenance-overlay::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 30%, rgba(120, 40, 255, 0.18) 0%, transparent 55%),
-      radial-gradient(ellipse at 80% 70%, rgba(200, 80, 255, 0.12) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 100%, rgba(90, 20, 200, 0.15) 0%, transparent 45%);
-    pointer-events: none;
-    animation: nxMaintPulse 7s ease-in-out infinite alternate;
-  }
-  #nx-maintenance-overlay::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(124,58,237,0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(124,58,237,0.06) 1px, transparent 1px);
-    background-size: 48px 48px;
-    opacity: 0.7;
-    pointer-events: none;
-  }
-  @keyframes nxMaintPulse {
-    0% { opacity: 0.7; }
-    100% { opacity: 1; }
-  }
-  .nx-maint-card {
-    position: relative;
-    z-index: 2;
-    max-width: 480px;
-    width: 100%;
-    background: rgba(15, 5, 35, 0.85);
-    border: 1px solid rgba(168, 85, 247, 0.25);
-    border-radius: 28px;
-    padding: 40px 32px;
-    text-align: center;
-    box-shadow:
-      0 0 0 1px rgba(168, 85, 247, 0.08),
-      0 25px 80px rgba(124, 58, 237, 0.25),
-      inset 0 1px 0 rgba(255,255,255,0.04);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-  .nx-maint-icon {
-    width: 88px;
-    height: 88px;
-    margin: 0 auto 24px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(168,85,247,0.25) 0%, rgba(124,58,237,0.08) 70%);
-    border: 1.5px solid rgba(168, 85, 247, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 36px;
-    color: #c084fc;
-    box-shadow: 0 0 40px rgba(168, 85, 247, 0.35);
-    animation: nxMaintIconPulse 2.4s ease-in-out infinite alternate;
-  }
-  @keyframes nxMaintIconPulse {
-    from { box-shadow: 0 0 30px rgba(168, 85, 247, 0.25); transform: scale(1); }
-    to   { box-shadow: 0 0 55px rgba(168, 85, 247, 0.5); transform: scale(1.04); }
-  }
-  .nx-maint-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'Orbitron', monospace;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #fbbf24;
-    background: rgba(251, 191, 36, 0.1);
-    border: 1px solid rgba(251, 191, 36, 0.25);
-    padding: 6px 14px;
-    border-radius: 999px;
-    margin-bottom: 18px;
-  }
-  .nx-maint-badge i { font-size: 11px; }
-  .nx-maint-title {
-    font-family: 'Orbitron', monospace;
-    font-size: clamp(1.35rem, 4.5vw, 1.85rem);
-    font-weight: 800;
-    background: linear-gradient(135deg, #f0e6ff 0%, #c084fc 40%, #a855f7 70%, #7c3aed 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin-bottom: 12px;
-    line-height: 1.25;
-  }
-  .nx-maint-desc {
-    font-size: 14px;
-    line-height: 1.7;
-    color: #a78bfa;
-    margin-bottom: 28px;
-  }
-  .nx-maint-desc strong {
-    color: #e0d0ff;
-    font-weight: 600;
-  }
-  .nx-maint-bar-wrap {
-    width: 100%;
-    height: 4px;
-    background: rgba(168, 85, 247, 0.12);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 18px;
-  }
-  .nx-maint-bar {
-    height: 100%;
-    width: 65%;
-    background: linear-gradient(90deg, #7c3aed, #c084fc, #e9d5ff, #c084fc, #7c3aed);
-    background-size: 200% 100%;
-    border-radius: 10px;
-    animation: nxMaintBar 2.2s linear infinite;
-  }
-  @keyframes nxMaintBar {
-    0% { background-position: 0% 0; }
-    100% { background-position: 200% 0; }
-  }
-  .nx-maint-footer {
-    font-size: 11px;
-    color: #6a5a8a;
-    letter-spacing: 0.5px;
-  }
-  .nx-maint-footer span {
-    color: #a78bfa;
-    font-weight: 600;
-  }
-  body.nx-maintenance-active {
-    overflow: hidden !important;
-  }
-  body.nx-maintenance-active > *:not(#nx-maintenance-overlay) {
-    pointer-events: none !important;
-    user-select: none !important;
-  }
-</style>
-
 </head>
 <body>
-
-<div id="nx-maintenance-overlay" role="dialog" aria-modal="true" aria-labelledby="nxMaintTitle">
-  <div class="nx-maint-card">
-    <div class="nx-maint-icon">
-      <i class="fa-solid fa-screwdriver-wrench"></i>
-    </div>
-    <div class="nx-maint-badge">
-      <i class="fa-solid fa-triangle-exclamation"></i>
-      Maintenance Mode
-    </div>
-    <h1 class="nx-maint-title" id="nxMaintTitle">Website Sedang Dalam Perbaikan</h1>
-    <p class="nx-maint-desc">
-      Kami sedang melakukan <strong>pemeliharaan sistem</strong> untuk meningkatkan performa dan keamanan.<br>
-      Silakan kembali lagi nanti. Terima kasih atas pengertiannya.
-    </p>
-    <div class="nx-maint-bar-wrap">
-      <div class="nx-maint-bar"></div>
-    </div>
-    <div class="nx-maint-footer">
-      <span>All Tools Nexus</span> · by Wanda
-    </div>
-  </div>
-</div>
-<script>
-(function(){
-  document.body.classList.add('nx-maintenance-active');
-  document.addEventListener('keydown', function(e){
-    e.preventDefault();
-    e.stopPropagation();
-  }, true);
-  document.addEventListener('click', function(e){
-    if(!e.target.closest || !e.target.closest('#nx-maintenance-overlay')){
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  }, true);
-})();
-</script>
 
     <div class="splash-screen" id="splash">
         <div class="nx-grid"></div>
@@ -7426,6 +7235,8 @@ const toolsData = {
         { id: 'fakedana', icon: 'fa-solid fa-money-bill-wave', name: 'Fake Dana', desc: 'Generate saldo Dana palsu', badge: 'Custom' },
         { id: 'fakedev', icon: 'fa-solid fa-laptop-code', name: 'FakeDev', desc: 'Buat profil developer dari nama, bio, dan foto', badge: 'API' },
         { id: 'fakelobby', icon: 'fa-solid fa-gamepad', name: 'Fake Lobby', desc: 'FF & ML lobby palsu', badge: 'Game' },
+        { id: 'cekprime', icon: 'fa-solid fa-crown', name: 'Cek Prime FF', desc: 'Hitung level & estimasi harga akun Prime Free Fire', badge: 'FF' },
+        { id: 'cekprofil', icon: 'fa-solid fa-user', name: 'Cek Profil FF', desc: 'Cek profil Free Fire via UID (nickname, level, clan, dll)', badge: 'FF' },
         { id: 'winquotes', icon: 'fa-brands fa-windows', name: 'Windows Quotes', desc: 'Quote ala Windows — 2 style', badge: '2 STYLE' },
         { id: 'nokiamsg', icon: 'fa-solid fa-mobile-retro', name: 'Nokia Message', desc: 'Buat gambar SMS jadul Nokia', badge: 'RETRO' },
         { id: 'tanyaustadz', icon: 'fa-solid fa-user-tie', name: 'Tanya Ustadz', desc: 'Meme generator', badge: 'Lucu' }
@@ -7456,7 +7267,9 @@ const toolsData = {
         { id: 'fotolink', icon: 'fa-solid fa-image', name: 'Foto To Link', desc: 'Upload & share', link: 'https://pixvault-bykz.netlify.app/' },
         { id: 'webencryption', icon: 'fa-solid fa-shield-halved', name: 'Web Encryption', desc: 'Encrypt & protect HTML', badge: 'SECURE' },
         { id: 'unbanwa', icon: 'fa-brands fa-whatsapp', name: 'Unban WhatsApp', desc: 'Tools & panduan unban WhatsApp', badge: 'WA' },
-        { id: 'kazefakelobby', icon: 'fa-solid fa-bolt', name: 'Fake Lobby FF', desc: 'Generator lobby Free Fire by Kaze', badge: 'KAZE' }
+        { id: 'kazefakelobby', icon: 'fa-solid fa-bolt', name: 'Fake Lobby FF', desc: 'Generator lobby Free Fire by Kaze', badge: 'KAZE' },
+        { id: 'cekprime', icon: 'fa-solid fa-crown', name: 'Cek Prime FF', desc: 'Hitung level & estimasi harga akun Prime Free Fire', badge: 'FF' },
+        { id: 'cekprofil', icon: 'fa-solid fa-user', name: 'Cek Profil FF', desc: 'Cek profil Free Fire via UID (nickname, level, clan, dll)', badge: 'FF' }
     ]
 };
 
@@ -7484,9 +7297,13 @@ function renderGrid(containerId, items, isExternal = false) {
             `onclick="window.openWebEncryption && window.openWebEncryption()"` :
             (item.id === 'tiktokhd' ?
                 `onclick="showTool('tiktokhd')"` :
+                (item.id === 'cekprime' ?
+                `onclick="showTool('cekprime')"` :
+                (item.id === 'cekprofil' ?
+                `onclick="showTool('cekprofil')"` :
                 (isExternal || item.link ?
                     `onclick="window.open('${item.link || '#'}','_blank')"` :
-                    `onclick="showTool('${item.id}')"`)))));
+                    `onclick="showTool('${item.id}')"`)))))));
         const themeClass = greenIds[item.id] ? ' theme-green' : '';
         return `
             <div class="tools-card${themeClass}" ${clickAttr}>
@@ -7548,6 +7365,8 @@ function showTool(toolId) {
         case 'fakebankjago': renderFakeBankJago(body); break;
         case 'fakedev': renderFakeDev(body); break;
         case 'fakelobby': renderFakeLobby(body); break;
+        case 'cekprime': renderCekPrime(body); break;
+        case 'cekprofil': renderCekProfil(body); break;
         case 'winquotes': renderWinquotes2(body); break;
         case 'nokiamsg': renderNokiaMsg(body); break;
         case 'tanyaustadz': renderTanyaUstadz(body); break;
@@ -8559,6 +8378,242 @@ function renderFakeLobby(body) {
         a.href = lobbyBlobUrl;
         a.download = `FakeLobby_${Date.now()}.png`;
         a.click();
+    };
+}
+
+function renderCekPrime(body) {
+    const defaultBanner = 'https://raw.githubusercontent.com/KingofGames02/Free-Fire-Items-Library/refs/heads/main/ff-icons/icon_callsign_basebg_bloodmoon26.png';
+    const defaultAvatar = 'https://raw.githubusercontent.com/KingofGames02/Free-Fire-Items-Library/refs/heads/main/ff-icons/900000013.png';
+    body.innerHTML = `
+        <h2><i class="fa-solid fa-crown"></i> Cek Prime FF</h2>
+        <p style="color:#8b7ab8;font-size:13px;margin-bottom:14px;">Hitung level Prime & estimasi harga jual akun Free Fire. Data diisi manual (bukan stalk real-time).</p>
+        <label>UID Free Fire</label>
+        <input type="text" id="cpUid" class="v-input" placeholder="Contoh: 123456789" inputmode="numeric">
+        <label>Nickname</label>
+        <input type="text" id="cpNick" class="v-input" placeholder="Nama di dalam game">
+        <label>Poin Prime</label>
+        <input type="text" id="cpPrime" class="v-input" placeholder="Contoh: 15000" inputmode="numeric">
+        <label>URL Avatar (opsional)</label>
+        <input type="url" id="cpAvatar" class="v-input" placeholder="Kosongkan = avatar default">
+        <button class="v-btn" id="cpBtn"><i class="fa-solid fa-calculator"></i> Hitung Prime</button>
+        <div id="cpResult" style="display:none;margin-top:16px;"></div>
+    `;
+
+    function primeLevel(pts) {
+        pts = parseInt(pts) || 0;
+        if (pts >= 200000) return 8;
+        if (pts >= 120000) return 7;
+        if (pts >= 60000) return 6;
+        if (pts >= 30000) return 5;
+        if (pts >= 10000) return 4;
+        if (pts >= 3000) return 3;
+        if (pts >= 1000) return 2;
+        if (pts >= 100) return 1;
+        return 0;
+    }
+    function estimasiHarga(pts, uid) {
+        pts = parseInt(pts) || 0;
+        const uidInt = parseInt(uid) || 0;
+        const variance = ((uidInt % 9) - 4) * 500000;
+        const harga = Math.max(1500000, (pts * 99) + 1500000 + variance);
+        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(harga);
+    }
+    function fmt(n) {
+        return new Intl.NumberFormat('id-ID').format(parseInt(n) || 0);
+    }
+    function esc(s) {
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    document.getElementById('cpBtn').onclick = async () => {
+        const uid = document.getElementById('cpUid').value.trim();
+        const nick = document.getElementById('cpNick').value.trim();
+        const pts = document.getElementById('cpPrime').value.replace(/\D/g, '');
+        let avatar = document.getElementById('cpAvatar').value.trim() || defaultAvatar;
+        if (!uid || !nick || !pts) {
+            alert('Lengkapi UID, Nickname, dan Poin Prime!');
+            return;
+        }
+        const btn = document.getElementById('cpBtn');
+        const box = document.getElementById('cpResult');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menghitung...';
+        box.style.display = 'block';
+        box.innerHTML = '<div class="result-box" style="text-align:center;"><i class="fas fa-spinner fa-spin"></i><br>Memproses data...</div>';
+
+        let banner = defaultBanner;
+        try {
+            const page = await fetch('https://yoantools.com/tools/cekprime', { credentials: 'omit' });
+            const html = await page.text();
+            const m = html.match(/formData\.append\('_token',\s*'([^']+)'\)/);
+            if (m) {
+                const fd = new FormData();
+                fd.append('_token', m[1]);
+                fd.append('uid', uid);
+                const r = await fetch('https://yoantools.com/tools/cekprime/get-banner', { method: 'POST', body: fd, credentials: 'omit' });
+                const j = await r.json().catch(() => null);
+                if (j && j.banner_url) banner = j.banner_url;
+            }
+        } catch (e) {}
+
+        const level = primeLevel(pts);
+        const harga = estimasiHarga(pts, uid);
+        box.innerHTML = `
+            <div id="cpCard" style="border-radius:16px;overflow:hidden;border:1px solid rgba(168,85,247,0.25);background:#141B2E;">
+                <div style="height:90px;background:url('${banner}') center/cover no-repeat;position:relative;">
+                    <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(20,27,46,0.95));"></div>
+                </div>
+                <div style="padding:16px;margin-top:-36px;position:relative;display:flex;gap:14px;align-items:flex-end;">
+                    <img src="${avatar}" onerror="this.src='${defaultAvatar}'" style="width:72px;height:72px;border-radius:14px;border:2px solid #a855f7;background:#0B0F1A;object-fit:cover;">
+                    <div style="flex:1;min-width:0;">
+                        <div style="font-weight:700;font-size:16px;color:#F5F6FA;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${esc(nick)}</div>
+                        <div style="font-family:monospace;font-size:12px;color:#8891AB;">UID ${esc(uid)}</div>
+                    </div>
+                    <div style="text-align:right;">
+                        <div style="font-size:10px;letter-spacing:1px;color:#c084fc;text-transform:uppercase;">Prime</div>
+                        <div style="font-size:22px;font-weight:800;color:#fbbf24;">Lv.${level}</div>
+                    </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px 16px;">
+                    <div style="background:rgba(255,255,255,0.04);border-radius:12px;padding:12px;">
+                        <div style="font-size:10px;color:#8891AB;text-transform:uppercase;">Poin Prime</div>
+                        <div style="font-weight:700;color:#e0d0ff;margin-top:4px;">${fmt(pts)}</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.04);border-radius:12px;padding:12px;">
+                        <div style="font-size:10px;color:#8891AB;text-transform:uppercase;">Estimasi Harga</div>
+                        <div style="font-weight:700;color:#4ade80;margin-top:4px;">${harga}</div>
+                    </div>
+                </div>
+                <div style="padding:0 16px 14px;font-size:11px;color:#6a5a8a;">*Estimasi kasar berdasarkan poin. Bukan harga pasar resmi.</div>
+            </div>
+            <div class="btn-group" style="margin-top:12px;">
+                <button class="v-btn" id="cpDlBtn"><i class="fas fa-download"></i> Download Kartu</button>
+            </div>
+        `;
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-calculator"></i> Hitung Prime';
+
+        document.getElementById('cpDlBtn').onclick = async () => {
+            const card = document.getElementById('cpCard');
+            const dlBtn = document.getElementById('cpDlBtn');
+            dlBtn.disabled = true;
+            dlBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
+            try {
+                if (!window.html2canvas) {
+                    await new Promise((resolve, reject) => {
+                        const s = document.createElement('script');
+                        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+                        s.onload = resolve; s.onerror = reject;
+                        document.head.appendChild(s);
+                    });
+                }
+                const canvas = await html2canvas(card, { backgroundColor: '#141B2E', scale: 2, useCORS: true, allowTaint: true });
+                const a = document.createElement('a');
+                a.download = 'Cek-Prime-' + (nick || 'Player') + '.png';
+                a.href = canvas.toDataURL('image/png');
+                a.click();
+            } catch (e) {
+                alert('Gagal mengunduh gambar.');
+            } finally {
+                dlBtn.disabled = false;
+                dlBtn.innerHTML = '<i class="fas fa-download"></i> Download Kartu';
+            }
+        };
+    };
+}
+
+
+function renderCekProfil(body) {
+    const defaultAvatar = 'https://raw.githubusercontent.com/KingofGames02/Free-Fire-Items-Library/refs/heads/main/ff-icons/900000013.png';
+    body.innerHTML = `
+        <h2><i class="fa-solid fa-user"></i> Cek Profil FF</h2>
+        <p style="color:#8b7ab8;font-size:13px;margin-bottom:14px;">Cek profil Free Fire lewat UID (data dari YoanTools).</p>
+        <label>UID Free Fire</label>
+        <input type="text" id="cfUid" class="v-input" placeholder="Contoh: 123456789" inputmode="numeric">
+        <button class="v-btn" id="cfBtn"><i class="fa-solid fa-magnifying-glass"></i> Cek Profil</button>
+        <div id="cfResult" style="display:none;margin-top:16px;"></div>
+    `;
+
+    function esc(s) {
+        return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    function row(label, value) {
+        if (value === undefined || value === null || value === '') return '';
+        return `<div style="background:rgba(255,255,255,0.04);border-radius:12px;padding:12px;">
+            <div style="font-size:10px;color:#8891AB;text-transform:uppercase;">${esc(label)}</div>
+            <div style="font-weight:600;color:#e0d0ff;margin-top:4px;word-break:break-word;">${value}</div>
+        </div>`;
+    }
+
+    document.getElementById('cfBtn').onclick = async () => {
+        const uid = document.getElementById('cfUid').value.trim();
+        if (!uid) return alert('Masukkan UID Free Fire!');
+        const btn = document.getElementById('cfBtn');
+        const box = document.getElementById('cfResult');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengecek...';
+        box.style.display = 'block';
+        box.innerHTML = '<div class="result-box" style="text-align:center;"><i class="fas fa-spinner fa-spin"></i><br>Memindai UID...</div>';
+
+        try {
+            // Ambil CSRF token dari halaman
+            const pageRes = await fetch('https://yoantools.com/tools/cekakunff', { credentials: 'include' });
+            const pageHtml = await pageRes.text();
+            const tokenMatch = pageHtml.match(/formData\.append\('_token',\s*'([^']+)'\)/);
+            if (!tokenMatch) throw new Error('Gagal ambil token. Coba lagi.');
+
+            const fd = new FormData();
+            fd.append('_token', tokenMatch[1]);
+            fd.append('uid', uid);
+
+            const res = await fetch('https://yoantools.com/tools/cekakunff', {
+                method: 'POST',
+                body: fd,
+                credentials: 'include'
+            });
+            const data = await res.json();
+            if (!res.ok || !data || !data.data) {
+                throw new Error((data && data.error) || 'Akun tidak ditemukan / gagal cek');
+            }
+            const d = data.data;
+            const avatar = d.avatar_url || defaultAvatar;
+            const clan = d.clan_name ? (esc(d.clan_name) + (d.clan_level != null ? ' (Lv.' + esc(d.clan_level) + ')' : '')) : '-';
+            const bio = d.bio ? esc(d.bio) : 'Tidak ada bio.';
+            const estimasi = d.estimasi_rp != null ? ('Rp ' + esc(d.estimasi_rp)) : (d.estimasi_dm != null ? esc(d.estimasi_dm) + ' DM' : '-');
+
+            box.innerHTML = `
+                <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(168,85,247,0.25);background:#141B2E;padding:16px;">
+                    <div style="display:flex;gap:14px;align-items:center;margin-bottom:16px;">
+                        <img src="${esc(avatar)}" onerror="this.src='${defaultAvatar}'" style="width:72px;height:72px;border-radius:14px;border:2px solid #a855f7;background:#0B0F1A;object-fit:cover;">
+                        <div style="min-width:0;flex:1;">
+                            <div style="font-weight:700;font-size:18px;color:#F5F6FA;">${esc(d.nickname || '-')}</div>
+                            <div style="font-family:monospace;font-size:12px;color:#8891AB;">UID ${esc(d.uid || uid)}</div>
+                            <div style="font-size:12px;color:#c084fc;margin-top:4px;">${bio}</div>
+                        </div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                        ${row('Level', esc(d.level))}
+                        ${row('EXP', esc(d.exp))}
+                        ${row('Server', esc(d.server))}
+                        ${row('Likes', esc(d.likes))}
+                        ${row('Prime Level', esc(d.prime_level))}
+                        ${row('Credit Score', esc(d.credit_score))}
+                        ${row('Booyah Pass', esc(d.booyah_pass))}
+                        ${row('Badge', d.badge_count != null ? esc(d.badge_count) + ' Badge' : '')}
+                        ${row('Akun dibuat', esc(d.create_date))}
+                        ${row('Umur akun', d.days_ago != null ? esc(d.days_ago) + ' hari' : '')}
+                        ${row('Last Login', esc(d.last_login))}
+                        ${row('Clan', clan)}
+                        ${row('Estimasi', estimasi)}
+                    </div>
+                </div>
+            `;
+        } catch (e) {
+            box.innerHTML = `<div class="result-box" style="color:#ef4444;">Gagal: ${esc(e.message || e)}</div>`;
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Cek Profil';
+        }
     };
 }
 
